@@ -1,5 +1,8 @@
 import pandas as pd
+import plotly.express as px
+
 from pandasgui import show
+
 
 tabela = pd.read_csv("./database/ClientesBanco.csv", sep=",", encoding="latin1")
 
@@ -14,3 +17,10 @@ qtd_categoria = tabela["Categoria"].value_counts()
 print(qtd_categoria)
 percentual = tabela["Categoria"].value_counts(normalize=True)
 print(percentual)
+
+
+# Procurando informações relevantes
+# Comparando coluna categoria(cliente x cancelado) com colunas de interece procurando um padrão
+for coluna in tabela:
+    graf = px.histogram(tabela, x=coluna, color="Categoria")
+    graf.show()
